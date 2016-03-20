@@ -77,6 +77,7 @@ define(function(){
       this.currentPage = 0;
       this.inShift = null;
       this.container = container;
+      this.dots  = [];
       this.pagesContainer = document.createElement('div');    
     }
 
@@ -89,6 +90,7 @@ define(function(){
       init : function (){
         this.insertPageNodes();
         this.insertSwitchTool();
+        this.dots[this.currentPage].style.backgroundColor = "#339999";
         autoSwitch();
         this.container.className = "ff-slider";
         
@@ -120,10 +122,12 @@ define(function(){
         var pageSwitchTool = document.createElement('div');
         pageSwitchTool.className = "tools";
         var i,dot;
+
         for(i = 0;i < imgUrls.length;i++){
           dot = document.createElement('div');
           dot.title = i;
           dot.onclick = pageSwitch;
+          this.dots.push(dot);
           pageSwitchTool.appendChild(dot);
         }
 
@@ -135,14 +139,16 @@ define(function(){
     mySlider.init();
     
     function pageSwitch (){
-        
-        
+        //currentPage改变前将当前dot的颜色变为普通色
+        //=====================================
+        mySlider.dots[mySlider.currentPage].style.backgroundColor = "gray";
+
         window.clearTimeout(mySlider.inShift);
-        console.log(mySlider)
+
+        //检测是否在滑动中，防止自动滑动和点击滑动及连续点击滑动的冲突。
+        //若在滑动则不做操作
+        //=============================================================
         if(!isSwitching){
-
-          
-
           isSwitching = true;
             //默认滑动距离为容器的宽度（即1张图片的宽度）
           var distance = -parseInt(mySlider.container.style.width);
@@ -164,20 +170,33 @@ define(function(){
             mySlider.currentPage++;
           }
 
-          step = distance/speed;
-          switching = window.setTimeout(slide, 1000/speed);    
+          //滑动前将下一个dot颜色变为醒目色
+          //===============================
+          mySlider.dots[mySlider.currentPage].style.backgroundColor = "#339999";
+          //取整便于计算，比较
+          //速度值越大步幅越大
+          //====================
+          step = parseInt(distance/(100-speed));
+          switching = window.setTimeout(slide, parseInt(1000/speed));    
         }
 
         function slide(){
 
-          pagesContainer.style.left = parseInt(pagesContainer.style.left)+step+'px';
-          totalStep += step;
-      
-          if(totalStep !== distance){
+          //step，totalStep，distance有正负
+          if(Math.abs(totalStep) < Math.abs(distance)){
+            //distanc不能整除step时，最后一步应加上totalStep和
+            //distance的差值，不然totalStep的绝对值会大于distance
+            //===================================================
+            if(Math.abs(distance-totalStep)<Math.abs(step)){
+              pagesContainer.style.left = parseInt(pagesContainer.style.left)+(distance-totalStep)+'px';
+              totalStep = distance;
+            }else{
+              pagesContainer.style.left = parseInt(pagesContainer.style.left)+step+'px';
+              totalStep += step;
+            }
             switching = window.setTimeout(slide,1000/speed);
           }else{
             window.clearTimeout(switching);
-            console.log(mySlider.pagesContainer.style.left,totalStep)
             isSwitching = false;
             autoSwitch();
           } 

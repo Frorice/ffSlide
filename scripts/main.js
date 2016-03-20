@@ -12,6 +12,8 @@ require(['slider'],function(slider){
     ['#','#','#'],
     ['http://img2.imgtn.bdimg.com/it/u=2666284116,3467609730&fm=11&gp=0.jpg',
      'http://img2.imgtn.bdimg.com/it/u=2666284116,3467609730&fm=11&gp=0.jpg',
-     'http://img2.imgtn.bdimg.com/it/u=2666284116,3467609730&fm=11&gp=0.jpg']
+     'http://img2.imgtn.bdimg.com/it/u=2666284116,3467609730&fm=11&gp=0.jpg'],
+     null,
+     80
   );
 });

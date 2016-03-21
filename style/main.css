@@ -7,8 +7,7 @@
   display: inline-block;
 }
 .link-node>img{
-  width : 200px;
-  height: 300px;
+  width : 100%;
 }
 .tools{
   background: white;

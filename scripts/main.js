@@ -10,9 +10,9 @@ require(['slider'],function(slider){
   slider(
     'ff-slider',
     ['#','#','#'],
-    ['http://img2.imgtn.bdimg.com/it/u=2666284116,3467609730&fm=11&gp=0.jpg',
-     'http://img2.imgtn.bdimg.com/it/u=2666284116,3467609730&fm=11&gp=0.jpg',
-     'http://img2.imgtn.bdimg.com/it/u=2666284116,3467609730&fm=11&gp=0.jpg'],
+    ['https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1023930876,2577057362&fm=111&gp=0.jpg',
+     'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1023930876,2577057362&fm=111&gp=0.jpg',
+     'https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1023930876,2577057362&fm=111&gp=0.jpg'],
      null,
      80
   );

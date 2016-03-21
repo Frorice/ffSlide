@@ -107,14 +107,15 @@ define(function(){
           linkNode.className = "link-node";
           imgNode.src = imgUrls[i];
           imgNode.alt = "图片加载失败";
-
+          imgNode.style.height = this.container.offsetHeight + 'px';
+          linkNode.style.width=this.container.offsetWidth+'px';
           linkNode.appendChild(imgNode);
           this.pagesContainer.appendChild(linkNode);
         }
         this.pagesContainer.style.left= 0;
         this.pagesContainer.style.position = 'absolute';
-        this.pagesContainer.style.width = parseInt(this.container.style.width)*parseInt(imgUrls.length)+'px';
-     
+        this.pagesContainer.style.width = parseInt(this.container.offsetWidth)*parseInt(imgUrls.length)+'px';
+  
         this.container.appendChild(this.pagesContainer);
       },
 
@@ -151,7 +152,7 @@ define(function(){
         if(!isSwitching){
           isSwitching = true;
             //默认滑动距离为容器的宽度（即1张图片的宽度）
-          var distance = -parseInt(mySlider.container.style.width);
+          var distance = -parseInt(mySlider.container.offsetWidth);
           var totalStep = 0;
           var pagesContainer = mySlider.pagesContainer;
           var step,switching;
